@@ -68,7 +68,6 @@ pQueue.put(sProc)
 print('='*21,' READY QUEUE ','='*20)
 
 #While we still have burst,do this
-#TODO: Fix context switches
 prevQProc = -1
 
 while sum(pBurst) != 0:
