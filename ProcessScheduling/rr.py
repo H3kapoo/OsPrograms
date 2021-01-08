@@ -2,46 +2,26 @@
 
 from queue import Queue 
 
-pCount = 0
-qTime= 0
-currTime = 0
-prevTime = currTime
-pArrival= []
-pBurst =[]
-pQueue = Queue()
-pUsed = []
+pCount = 0            #Total number of processes
+qTime = 0             #Quantum time
+currTime = 0          #Current scheduling time
+prevTime = currTime   #Previous scheduling time
+pArrival= []          #Process arrival list
+pBurst = []           #Process burst list
+pQueue = Queue()      #Process queue
+pUsed = []            #Already queued processes list
+granttList = []       #Keeps track of processes execution to construct GRANTT
+contextSwitches = 0   #How many context switches did the RR perform
 
-#Extract data from file
-with open("scData.txt","r") as f:
-
-    while True:
-        line = f.readline().strip('\n')
-
-        if not line:
-            break
-
-        pCount+=1
-        pArrival.append(int(line.split(",")[0]))
-        pBurst.append(int(line.split(",")[1]))
-
-completionTime = [-1]*len(pArrival)
-turnAroundTime = [-1]*len(pArrival)
-waitTime = [-1]*len(pArrival)
-responseTime = [-1]*len(pArrival)
-allocatedAt = [-1]*len(pArrival)
-
-pBurstCopy = pBurst.copy()
-
-
+#Get first process that will be runned
 def startProc():
-
     minV = min(pArrival)
-
     for index,val in enumerate(pArrival):
         if minV == val:
             pUsed.append(index) #mark pid as used
             return index
 
+#Get the ordered by arrival time processes that arrived between [startTime,endTime]
 def getProcessesArrived(startTime,endTime):
     pList = []
     pListVal = []
@@ -55,53 +35,85 @@ def getProcessesArrived(startTime,endTime):
     Z = [(x,y) for x,y in sorted(zip(pListVal,pList),key=lambda pair: pair[0])]
     return Z
 
+#Does exactly what it says
+def getContextSwitches():
+    cs = 0
+    for i in range(0,len(granttList)-1):
+        if granttList[i] != granttList[i+1]:
+            cs+=1
+    return cs
 
+#Extract data from file
+with open("../scData.txt","r") as f:
+    while True:
+        line = f.readline().strip('\n')
+        if not line:
+            break
+        pCount+=1
+        pArrival.append(int(line.split(",")[0]))
+        pBurst.append(int(line.split(",")[1]))
+
+#Handle user response
 userResponse = input("Use optimal quantum time? [y/n]")
 
 if userResponse == "y":
     qTime = round( 8/10 * (sum(pBurst) / pCount ) )
 else:
     qTime = int(input("Input quantum time: "))
+print()
 
+#Initialize data arrays
+completionTime = [-1]*len(pArrival)
+turnAroundTime = [-1]*len(pArrival)
+waitTime = [-1]*len(pArrival)
+responseTime = [-1]*len(pArrival)
+allocatedAt = [-1]*len(pArrival)
+pBurstCopy = pBurst.copy()
+
+#Preinitialize Round Robin
 sProc = startProc()
-
 currTime = pArrival[sProc]
-
 pQueue.put(sProc)
 
-pCurr = -1
+#While we still have bursts, do Round Robin
+currTimePrev = 0
 
-#While we still have burst,do this
 while sum(pBurst) != 0:
-
-    print(f"Ready queue at time {currTime} : {[x+1 for x in pQueue.queue]}")
-
+    
     qProc = pQueue.get()
 
+    l = [x+1 for x in pQueue.queue]
+    l.insert(0,qProc+1)
+    print(f"Ready queue at time {str(currTime).center(3)} : {l}")
+
+    granttList.append((currTime,qProc))
+
+    #Populate responseT array
     if responseTime[qProc] ==-1:
         responseTime[qProc] = currTime - pArrival[qProc]
 
-    #update time and burst  
+    #Update time and burst  
     if pBurst[qProc] <= qTime:
         currTime += pBurst[qProc]
         pBurst[qProc] -= pBurst[qProc]
+        currTimePrev = pBurst[qProc]
     else:
         currTime += qTime
         pBurst[qProc] -= qTime
-
+        currTimePrev = qTime
+    
     #print(f"Time {prevTime} to {currTime} ==> P{qProc+1} ==> New Burst is {pBurst[qProc]}")
 
-    #check if someone arrived meanwhile and put them in queue
+    #Check if someone arrived meanwhile and put them in queue
     arrivedMeanwhile = getProcessesArrived(prevTime,currTime)
-    
-    #print(arrivedMeanwhile)
-    
+
     for p in arrivedMeanwhile:
         pQueue.put(p[1])
-        print(f"Ready queue at time {p[0]} : {[x+1 for x in pQueue.queue]} => {p[1]+1} arrived")
+        ll = [x+1 for x in pQueue.queue]
+        ll.insert(0,qProc+1)
+        print(f"Ready queue at time {str(p[0]).center(3)} : {ll} => {p[1]+1} arrived") 
 
-
-    #put handle proc back in queue
+    #Put handle process back in queue or end it's life
     if pBurst[qProc] != 0:
         pQueue.put(qProc)
     elif pBurst[qProc] == 0:
@@ -112,29 +124,50 @@ while sum(pBurst) != 0:
 
     prevTime = currTime
 
-
-
-
-
 #Print output
-if True:
-    if False:
-        print("AT - Arrival Time")
-        print("BT - Burst Time")
-        print("CT - Completion Time")
-        print("TR - Turnaround Time")
-        print("TW - Wait Time")
-        print("RT - Response Time")
+print()
 
-    print("======== AT === BT === CT === TR === TW === RT ========")
-    for i in range(0,pCount):
-        print(f"= P{str(i+1).ljust(4)}|{str(pArrival[i]).center(5)}| {str(pBurstCopy[i]).center(5)}|{str(completionTime[i]).center(5)}| {str(turnAroundTime[i]).center(5)}| {str(waitTime[i]).center(5)}| {str(responseTime[i]).center(5)}=")
+print("========= AT ==== BT ==== CT ==== TR ==== TW ==== RT ===")
+for i in range(0,pCount):
+    print(f"= P{str(i+1).ljust(4)}|",end='')
+    print(f"{str(pArrival[i]).center(7)}|",end='')
+    print(f"{str(pBurstCopy[i]).center(7)}|",end='')
+    print(f"{str(completionTime[i]).center(7)}|",end='')
+    print(f"{str(turnAroundTime[i]).center(7)}|",end='')
+    print(f"{str(waitTime[i]).center(7)}|",end='')
+    print(f"{str(responseTime[i]).center(7)}=")
 
-    print('-'*55)
+print('='*56)
 
-    print(f"Avg TR: {sum(turnAroundTime) / pCount}")
-    print(f"Avg TW: {sum(waitTime) / pCount}")
-    print(f"Avg RT: {sum(responseTime) / pCount}")
+#Print processes
+print('  |',end='')
+for p in granttList:
+    print(f" P{p[1]+1} |",end='')
+print()
 
-    print(f"Quantum time: {qTime}")
-    print('='*55)
+#Print ^
+print('  ^',end='')
+for p in granttList:
+    if p[1]+1 >= 10:
+        print("     ^",end='')
+    else:
+        print("    ^",end='')
+print()
+
+#Print time stamp
+i=0
+for p in granttList:
+    if p[1]+1 >= 10 and i != 0:
+        print(f" {str(p[0]).center(5)}",end='')
+    else:
+        print(f"{str(p[0]).center(5)}",end='')
+    i=1
+print(f"{str(currTime).center(5)}")
+
+print('='*56)
+print(f"Avg TR (Turn Around)  : {sum(turnAroundTime) / pCount}")
+print(f"Avg TW (Wait Time)    : {sum(waitTime) / pCount}")
+print(f"Avg RT (Response Time): {sum(responseTime) / pCount}")
+print(f"Context switches      : {getContextSwitches()}")
+print(f"Quantum time          : {qTime}")
+print('='*56)

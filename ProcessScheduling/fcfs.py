@@ -11,7 +11,7 @@ pQueue = Queue()
 pUsed = []
 
 #Extract data from file
-with open("scData.txt","r") as f:
+with open("../scData.txt","r") as f:
 
     while True:
         line = f.readline().strip('\n')
@@ -75,7 +75,7 @@ while sum(pBurst) != 0:
     currTime += pBurst[qProc]
     pBurst[qProc] = 0
 
-    #print(f"Time {prevTime} to {currTime} ==> P{qProc+1} ==> New Burst is {pBurst[qProc]}")
+    print(f"Time {prevTime} to {currTime} ==> P{qProc+1} ==> New Burst is {pBurst[qProc]}")
 
     #check if someone arrived meanwhile and put them in queue
     arrivedMeanwhile = getProcessesArrived(prevTime,currTime) #should also return an array specifying the exact arrival for each of the pids
@@ -88,16 +88,12 @@ while sum(pBurst) != 0:
     completionTime[qProc] = currTime
     turnAroundTime[qProc] = completionTime[qProc] - pArrival[qProc]
     waitTime[qProc] = turnAroundTime[qProc] - pBurstCopy[qProc]
-    #print(f'P{qProc+1} just finished at time {currTime}')
+    print(f'P{qProc+1} just finished at time {currTime}')
 
     prevTime = currTime
 
-
-
-
-
 #Print output
-if False    :
+if True    :
     if False:
         print("AT - Arrival Time")
         print("BT - Burst Time")
@@ -105,7 +101,7 @@ if False    :
         print("TR - Turnaround Time")
         print("TW - Wait Time")
         print("RT - Response Time")
-
+    print()
     print("======== AT === BT === CT === TR === TW === RT ========")
     for i in range(0,pCount):
         print(f"= P{str(i+1).ljust(4)}|{str(pArrival[i]).center(5)}| {str(pBurstCopy[i]).center(5)}|{str(completionTime[i]).center(5)}| {str(turnAroundTime[i]).center(5)}| {str(waitTime[i]).center(5)}| {str(responseTime[i]).center(5)}=")
