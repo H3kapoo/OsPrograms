@@ -10,8 +10,7 @@ def fifoAlgorithm(pages, frames,mappingMoment):
     page_faults = 0
 
     for i in range(n):
-    
-        fr.clear()
+        
         if (len(s) < frames):
             if (pages[i] not in s):
                 s.add(pages[i])
@@ -26,8 +25,10 @@ def fifoAlgorithm(pages, frames,mappingMoment):
                 s.add(pages[i])
                 indexes.put(pages[i])
                 page_faults += 1
-            
-        for x in list(indexes.queue):
-            fr.append(x)
+
+        if i == mappingMoment:
+            for x in list(indexes.queue):
+                fr.append(x)
+            fr.reverse()
 
     return page_faults,fr
