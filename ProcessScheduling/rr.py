@@ -75,17 +75,17 @@ sProc = startProc()
 currTime = pArrival[sProc]
 pQueue.put(sProc)
 
-#While we still have bursts, do Round Robin
-currTimePrev = 0
+print('='*21,' READY QUEUE ','='*20)
 
+#While we still have bursts, do Round Robin
 while sum(pBurst) != 0:
     
-    qProc = pQueue.get()
 
     l = [x+1 for x in pQueue.queue]
-    l.insert(0,qProc+1)
     print(f"Ready queue at time {str(currTime).center(3)} : {l}")
 
+    qProc = pQueue.get()
+  
     granttList.append((currTime,qProc))
 
     #Populate responseT array
@@ -96,12 +96,10 @@ while sum(pBurst) != 0:
     if pBurst[qProc] <= qTime:
         currTime += pBurst[qProc]
         pBurst[qProc] -= pBurst[qProc]
-        currTimePrev = pBurst[qProc]
     else:
         currTime += qTime
-        pBurst[qProc] -= qTime
-        currTimePrev = qTime
-    
+        pBurst[qProc] -= qTime    
+
     #print(f"Time {prevTime} to {currTime} ==> P{qProc+1} ==> New Burst is {pBurst[qProc]}")
 
     #Check if someone arrived meanwhile and put them in queue
@@ -110,7 +108,6 @@ while sum(pBurst) != 0:
     for p in arrivedMeanwhile:
         pQueue.put(p[1])
         ll = [x+1 for x in pQueue.queue]
-        ll.insert(0,qProc+1)
         print(f"Ready queue at time {str(p[0]).center(3)} : {ll} => {p[1]+1} arrived") 
 
     #Put handle process back in queue or end it's life
@@ -125,8 +122,6 @@ while sum(pBurst) != 0:
     prevTime = currTime
 
 #Print output
-print()
-
 print("========= AT ==== BT ==== CT ==== TR ==== TW ==== RT ===")
 for i in range(0,pCount):
     print(f"= P{str(i+1).ljust(4)}|",end='')
@@ -137,7 +132,7 @@ for i in range(0,pCount):
     print(f"{str(waitTime[i]).center(7)}|",end='')
     print(f"{str(responseTime[i]).center(7)}=")
 
-print('='*56)
+print('='*23,' GRANTT ','='*23)
 
 #Print processes
 print('  |',end='')
@@ -164,10 +159,11 @@ for p in granttList:
     i=1
 print(f"{str(currTime).center(5)}")
 
-print('='*56)
-print(f"Avg TR (Turn Around)  : {sum(turnAroundTime) / pCount}")
-print(f"Avg TW (Wait Time)    : {sum(waitTime) / pCount}")
-print(f"Avg RT (Response Time): {sum(responseTime) / pCount}")
-print(f"Context switches      : {getContextSwitches()}")
-print(f"Quantum time          : {qTime}")
+print('='*22,' AVERAGES ','='*22)
+
+print(f"= Avg TR (Turn Around)  : {sum(turnAroundTime) / pCount}")
+print(f"= Avg TW (Wait Time)    : {sum(waitTime) / pCount}")
+print(f"= Avg RT (Response Time): {sum(responseTime) / pCount}")
+print(f"= Context switches      : {getContextSwitches()}")
+print(f"= Quantum time          : {qTime}")
 print('='*56)
