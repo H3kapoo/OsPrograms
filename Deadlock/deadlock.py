@@ -24,10 +24,11 @@ needListCopy = needList.copy()
 #Minimum available resources so that the system will not go into deadlock
 #Start at min(NEED_LIST)
 availableRes = min(needList)
+aCopy = availableRes
 
 #run Banker's to find min resources needed
 while True:
-    avCopy = availableRes
+    aCopy = availableRes
     print(f"Available resources {availableRes} attempt:")
     for i in range(0,pCount):
         #Find suitable process based on available res
@@ -37,12 +38,12 @@ while True:
                 availableRes += allocList[p]
                 print(f"Process {p+1} needed {needList[p]} now scheduled. It released {allocList[p]}. Available res: {availableRes}")
                 
-
+    #break 
     if len(resolveList) == pCount:
         print("DONE")
         break
     print("INCREMENTING")
-    availableRes = avCopy+1
+    availableRes = aCopy+1
     needList = needListCopy.copy()
     resolveList.clear()
             
@@ -57,8 +58,8 @@ for i in range(0,pCount):
     print(f"{str(needListCopy[i]).center(8)}  =")
 
 print("="*14,"SAFE SEQ","="*13)
-print(resolveList if len(resolveList) == pCount else f"None for available resources {avCopy}")
+print(resolveList if len(resolveList) == pCount else f"None for available resources {aCopy}")
 print("="*15,"STATS","="*15)
-print(f"Min av. res. after initial allocation: {availableRes - sum(allocList)}")
+print(f"Min av. res. after initial allocation: {aCopy}")
 print(f"Total min resources needed           : { availableRes}")
 print("="*37)
