@@ -62,8 +62,8 @@ def bankerAlg(_max,_alloc,work,log = False):
 
     return [p+1 for p in _solved]
 
-#Compute total number of resources after init alloc2 for subpoint b)
-def a12(_max,_alloc,_alloc2 = [] ,verbose = False):
+#Returns total number of resources after init alloc2 for subpoint b)
+def a12(_max,_alloc,_alloc2 = []):
     initWork = 0
 
     while True:
@@ -72,7 +72,7 @@ def a12(_max,_alloc,_alloc2 = [] ,verbose = False):
         if len(solved) == 0:
             initWork+=1
         else:
-            bankerAlg(_max,_alloc,initWork,verbose)
+            bankerAlg(_max,_alloc,initWork)
             break
     
     #Print stuff
@@ -129,6 +129,7 @@ def b2(process,addedReq,work,_max,_alloc):
     return "[None]"
 
 secondProc = b2(firstProc-1,addReq,b1Available,maxList,allocList3)
+
 if secondProc != "[None]":
     maxList[firstProc-1] += addReq
     maxList[secondProc] += addReq
@@ -141,7 +142,7 @@ if secondProc != "[None]":
         print(f"{str(maxList[i] - allocList3[i]).center(8)}   =")
     print("======================================")
     print(f"{addReq} additional resources added to P{firstProc} MAX")
-    print(f"If P{secondProc+1} gets an additional {addReq} resources, the system is still safe")
+    print(f"If P{secondProc+1} gets an additional {addReq} resources, the system is still safe, MAX = {maxList[secondProc]}")
 else:
     print(f"{addReq} additional resources added to P{firstProc} MAX")
     print(f"No process can be granted an additional {addReq} and be safe")
