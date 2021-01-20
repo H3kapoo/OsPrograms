@@ -20,7 +20,6 @@ def fifoAlgorithm(pages, frames,mappingMoment):
                 indexes.put(pages[i])
         else:
             if (pages[i] not in s):
-
                 val = indexes.queue[0]
                 indexes.get()
                 s.remove(val)

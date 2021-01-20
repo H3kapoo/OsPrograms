@@ -42,7 +42,7 @@ def getProcessesArrived(startTime,endTime):
 def getContextSwitches():
     cs = 0
     for i in range(0,len(granttList)-1):
-        if granttList[i] != granttList[i+1]:
+        if granttList[i][1] != granttList[i+1][1]:
             cs+=1
     return cs
 

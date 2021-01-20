@@ -3,6 +3,7 @@
 from queue import Queue 
 
 pCount = 0            #Total number of processes
+qTime = 0             #Quantum time
 currTime = 0          #Current scheduling time
 prevTime = currTime   #Previous scheduling time
 pArrival= []          #Process arrival list
@@ -38,7 +39,7 @@ def getProcessesArrived(startTime,endTime):
 def getContextSwitches():
     cs = 0
     for i in range(0,len(granttList)-1):
-        if granttList[i] != granttList[i+1]:
+        if granttList[i][1] != granttList[i+1][1]:
             cs+=1
     return cs
 
@@ -51,6 +52,15 @@ with open("../scData.txt","r") as f:
         pCount+=1
         pArrival.append(int(line.split(",")[0]))
         pBurst.append(int(line.split(",")[1]))
+
+#Handle user response
+userResponse = input("Use optimal quantum time? [y/n]")
+
+if userResponse == "y":
+    qTime = round( 8/10 * (sum(pBurst) / pCount ) )
+else:
+    qTime = int(input("Input quantum time: "))
+print()
 
 #Initialize data arrays
 completionTime = [-1]*len(pArrival)
@@ -69,11 +79,14 @@ print('='*21,' READY QUEUE ','='*20)
 
 #While we still have burst,do this
 prevQProc = -1
+prevL = []
 
 while sum(pBurst) != 0:
 
     l = [x+1 for x in pQueue.queue if x !=prevQProc]
-    print(f"Ready queue at time {str(currTime).center(3)} : {l}")
+    if l != prevL:
+        print(f"Ready queue at time {str(currTime).center(3)} : {l}")
+        prevL = l
 
     pQueueCopy =  Queue()
     minBurst = 9999
@@ -101,16 +114,22 @@ while sum(pBurst) != 0:
         if p != qProc:
             pQueue.put(p)
 
-    if qProc != prevQProc:
-        granttList.append((currTime,qProc))
+   # if qProc != prevQProc:
+    granttList.append((currTime,qProc))
 
     #Populate responseT array
     if responseTime[qProc] == -1:
         responseTime[qProc] = currTime - pArrival[qProc]
 
     #Update time and burst 
-    currTime += 1
-    pBurst[qProc] -= 1
+    if pBurst[qProc] <= qTime:
+        currTime += pBurst[qProc]
+        pBurst[qProc] -= pBurst[qProc]
+    else:
+        currTime += qTime
+        pBurst[qProc] -= qTime    
+    #currTime += 1
+    #pBurst[qProc] -= 1
 
     #print(f"Time {prevTime} to {currTime} ==> P{qProc+1} ==> New Burst is {pBurst[qProc]}")
 
@@ -148,7 +167,7 @@ for i in range(0,pCount):
 
 print('='*23,' GRANTT ','='*23)
 
-#Print processes
+#Print GRANTT diagram
 print('  |',end='')
 for p in granttList:
     print(f" P{p[1]+1} |",end='')

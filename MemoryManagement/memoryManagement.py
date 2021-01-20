@@ -39,10 +39,10 @@ fifoFail,fifoPagesMemoryMapping,fifoLists          = fifoAlgorithm(processAccess
 
 #Find page frame for each algorithm at moment and address
 #Find 'vp' index in the above ^ memory mappings
-vp = pageFrameAtAddress // pageSize
-pfOptimal = [x for x in range(0,numberOfPageFrames) if optimalPagesMemoryMapping[x] == vp]
-pfFIFO = [x for x in range(0,numberOfPageFrames) if fifoPagesMemoryMapping[x] == vp]
-pfClock = [x for x in range(0,numberOfPageFrames) if clockPagesMemoryMapping[x] == vp]
+vp = (pageFrameAtAddress // pageSize) % numberOfPageFrames
+pfOptimal = [x-1 for x in range(0,numberOfPageFrames) if optimalLists[10][x] == vp]
+pfFIFO = [x-1 for x in range(0,numberOfPageFrames) if fifoLists[10][x] == vp]
+pfClock = [x-1 for x in range(0,numberOfPageFrames) if clockLists[10][x] == vp]
 
 
 #Print them out nicely
@@ -58,14 +58,14 @@ print(f"Page frame at address (hex)   : dec: {pageFrameAtAddress} hex :{hex(page
 print("="*40)
 print(f"a) Number of virtual pages is: {numberOfVirtualPages}\n   Number of page frames is: {numberOfPageFrames}")
 print(f"b) Optimal failure count: {optimalFail}")
-for x in optimalLists:
-    print(x)
+for i,x in enumerate(optimalLists):
+    print(i,x)
 print(f"   FIFO failure count: {fifoFail}")
-for x in fifoLists:
-    print(x)
+for i,x in enumerate(fifoLists):
+    print(i,x)
 print(f"   Clock failure count: {clockFail}")
-for x in clockLists:
-    print(x)
+for i,x in enumerate(clockLists):
+    print(i,x)
 print(f"c) Optimal pages memory mapping at moment {pagesMemoryMappingAtMoment} : {optimalPagesMemoryMapping}")
 print(f"   FIFO pages memory mapping at moment {pagesMemoryMappingAtMoment}    : {fifoPagesMemoryMapping}")
 print(f"   Clock pages memory mapping at moment {pagesMemoryMappingAtMoment}   : {clockPagesMemoryMapping}")
