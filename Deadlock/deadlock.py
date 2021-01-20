@@ -117,10 +117,11 @@ def b2(process,addedReq,work,_max,_alloc):
     while True:
         _maxCopy[process] += addedReq  
         if process != index:
+            print("Trying with process..",index+1)
             _maxCopy[index] += addedReq
             if len(bankerAlg(_maxCopy,_alloc,work)) != 0:
                 return index
-        if index < _pCount:
+        if index < _pCount-1:
             index+=1
             _maxCopy = _max.copy()
         else:
@@ -128,15 +129,20 @@ def b2(process,addedReq,work,_max,_alloc):
     return "[None]"
 
 secondProc = b2(firstProc-1,addReq,b1Available,maxList,allocList3)
-maxList[firstProc-1] += addReq
-maxList[secondProc] += addReq
+if secondProc != "[None]":
+    maxList[firstProc-1] += addReq
+    maxList[secondProc] += addReq
 
-print("========= ALLOC === MAX === NEED =====")
-for i in range(0,len(maxList)):
-    print(f"= P{str(i+1).ljust(4)}|",end='')
-    print(f"{str(allocList3[i]).center(8)}|",end='')
-    print(f"{str(maxList[i]).center(8)}|",end='')
-    print(f"{str(maxList[i] - allocList3[i]).center(8)}   =")
-print("======================================")
-print(f"{addReq} additional resources added to P{firstProc} MAX")
-print(f"If P{secondProc+1} gets an additional {addReq} resources, the system is still safe")
+    print("========= ALLOC === MAX === NEED =====")
+    for i in range(0,len(maxList)):
+        print(f"= P{str(i+1).ljust(4)}|",end='')
+        print(f"{str(allocList3[i]).center(8)}|",end='')
+        print(f"{str(maxList[i]).center(8)}|",end='')
+        print(f"{str(maxList[i] - allocList3[i]).center(8)}   =")
+    print("======================================")
+    print(f"{addReq} additional resources added to P{firstProc} MAX")
+    print(f"If P{secondProc+1} gets an additional {addReq} resources, the system is still safe")
+else:
+    print(f"{addReq} additional resources added to P{firstProc} MAX")
+    print(f"No process can be granted an additional {addReq} and be safe")
+
