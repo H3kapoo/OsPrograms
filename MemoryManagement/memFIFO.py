@@ -6,6 +6,8 @@ def fifoAlgorithm(pages, frames,mappingMoment):
 
     indexes = Queue()
     fr = []
+    fr2 = []
+    frLists = []
 
     page_faults = 0
 
@@ -31,4 +33,10 @@ def fifoAlgorithm(pages, frames,mappingMoment):
                 fr.append(x)
             fr.reverse()
 
-    return page_faults,fr
+        for x in list(indexes.queue):
+            fr2.append(x)
+        fr2.reverse()
+        frLists.append(fr2.copy())
+        fr2.clear()
+
+    return page_faults,fr,frLists

@@ -27,6 +27,7 @@ def optimalAlgorithm(pg,fn,mappingMoment):
     hits=0
     fr = []
     frcopy = []
+    frLists = []
     for i in range(0,len(pg)):
 
         if search(pg[i],fr):
@@ -41,5 +42,7 @@ def optimalAlgorithm(pg,fn,mappingMoment):
         if i == mappingMoment:
                 frcopy = fr.copy()
 
-    return len(pg)-hits,frcopy
+        frLists.append(fr.copy())
+
+    return len(pg)-hits,frcopy,frLists
 

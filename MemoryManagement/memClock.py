@@ -19,6 +19,7 @@ def clockAlgorithm(pList,pageFrames,mappingMoment):
     arr = [-1]*pageFrames
     secondChance = [False]*pageFrames
     frcopy = []
+    frLists = []
 
     for i in range(0,len(pList)):
         if not findAndUpdate(pList[i],arr,secondChance,pageFrames):
@@ -26,6 +27,7 @@ def clockAlgorithm(pList,pageFrames,mappingMoment):
             pf+=1
         if i ==  mappingMoment:
             frcopy = arr.copy()
+        frLists.append(arr.copy())
 
-    return pf,frcopy
+    return pf,frcopy,frLists
 

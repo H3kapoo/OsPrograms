@@ -13,6 +13,9 @@ pUsed = []            #Already queued processes list
 granttList = []       #Keeps track of processes execution to construct GRANTT
 contextSwitches = 0   #How many context switches did the RR perform
 
+#Line ARRIVAL,BURST
+# ...
+
 #Get first process that will be runned
 def startProc():
     minV = min(pArrival)

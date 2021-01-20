@@ -33,9 +33,9 @@ with open("../mmData.txt","r") as f:
 numberOfVirtualPages = 2**systemBits // pageSize
 numberOfPageFrames = ramAvailable*1024 // pageSize
 
-optimalFail,optimalPagesMemoryMapping = optimalAlgorithm(processAccessList,numberOfPageFrames,pagesMemoryMappingAtMoment)
-clockFail,clockPagesMemoryMapping     = clockAlgorithm(processAccessList,numberOfPageFrames,pagesMemoryMappingAtMoment)
-fifoFail,fifoPagesMemoryMapping       = fifoAlgorithm(processAccessList,numberOfPageFrames,pagesMemoryMappingAtMoment) #TODO: gives wrong output
+optimalFail,optimalPagesMemoryMapping,optimalLists = optimalAlgorithm(processAccessList,numberOfPageFrames,pagesMemoryMappingAtMoment)
+clockFail,clockPagesMemoryMapping,clockLists       = clockAlgorithm(processAccessList,numberOfPageFrames,pagesMemoryMappingAtMoment)
+fifoFail,fifoPagesMemoryMapping,fifoLists          = fifoAlgorithm(processAccessList,numberOfPageFrames,pagesMemoryMappingAtMoment)
 
 #Find page frame for each algorithm at moment and address
 #Find 'vp' index in the above ^ memory mappings
@@ -58,13 +58,19 @@ print(f"Page frame at address (hex)   : dec: {pageFrameAtAddress} hex :{hex(page
 print("="*40)
 print(f"a) Number of virtual pages is: {numberOfVirtualPages}\n   Number of page frames is: {numberOfPageFrames}")
 print(f"b) Optimal failure count: {optimalFail}")
+for x in optimalLists:
+    print(x)
 print(f"   FIFO failure count: {fifoFail}")
+for x in fifoLists:
+    print(x)
 print(f"   Clock failure count: {clockFail}")
+for x in clockLists:
+    print(x)
 print(f"c) Optimal pages memory mapping at moment {pagesMemoryMappingAtMoment} : {optimalPagesMemoryMapping}")
 print(f"   FIFO pages memory mapping at moment {pagesMemoryMappingAtMoment}    : {fifoPagesMemoryMapping}")
 print(f"   Clock pages memory mapping at moment {pagesMemoryMappingAtMoment}   : {clockPagesMemoryMapping}")
 print(f"d) The virtual page number is: {vp}")
-print(f"   Corresponding page frame number at address {pageFrameAtAddress} for optimal: { pfOptimal[0] }")
-print(f"   Corresponding page frame number at address {pageFrameAtAddress} for fifo   : { pfFIFO[0] }")
-print(f"   Corresponding page frame number at address {pageFrameAtAddress} for clock  : { pfClock[0] }")
+print(f"   Corresponding page frame number at address {pageFrameAtAddress} for optimal: { pfOptimal }")
+print(f"   Corresponding page frame number at address {pageFrameAtAddress} for fifo   : { pfFIFO }")
+print(f"   Corresponding page frame number at address {pageFrameAtAddress} for clock  : { pfClock }")
 print("="*40)

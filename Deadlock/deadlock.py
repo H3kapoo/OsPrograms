@@ -23,7 +23,7 @@ with open("../dlData.txt","r") as f:
 
 
 #Returns safe seq if any for the specific parameters
-def bankerAlg(_max,_alloc,work,log = False):
+def bankerAlg(_max,_alloc,work,log=False):
     _pCount = len(_max)
     _solved = []
     _need = []
@@ -67,12 +67,12 @@ def a12(_max,_alloc,_alloc2 = []):
     initWork = 0
 
     while True:
-        solved = bankerAlg(_max,_alloc,initWork)
+        solved = bankerAlg(_max,_alloc,initWork,False)
 
         if len(solved) == 0:
             initWork+=1
         else:
-            bankerAlg(_max,_alloc,initWork)
+            bankerAlg(_max,_alloc,initWork,True)
             break
     
     #Print stuff

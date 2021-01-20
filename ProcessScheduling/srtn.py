@@ -72,7 +72,7 @@ prevQProc = -1
 
 while sum(pBurst) != 0:
 
-    l = [x+1 for x in pQueue.queue]
+    l = [x+1 for x in pQueue.queue if x !=prevQProc]
     print(f"Ready queue at time {str(currTime).center(3)} : {l}")
 
     pQueueCopy =  Queue()
