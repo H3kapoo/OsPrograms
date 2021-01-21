@@ -39,7 +39,7 @@ fifoFail,fifoPagesMemoryMapping,fifoLists          = fifoAlgorithm(processAccess
 
 #Find page frame for each algorithm at moment and address
 #Find 'vp' index in the above ^ memory mappings
-vp = (pageFrameAtAddress // pageSize) % numberOfPageFrames
+vp = (pageFrameAtAddress // pageSize) #% numberOfPageFrames
 pfOptimal = [x-1 for x in range(0,numberOfPageFrames) if optimalLists[10][x] == vp]
 pfFIFO = [x-1 for x in range(0,numberOfPageFrames) if fifoLists[10][x] == vp]
 pfClock = [x-1 for x in range(0,numberOfPageFrames) if clockLists[10][x] == vp]

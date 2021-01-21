@@ -65,13 +65,11 @@ sProc = startProc()
 currTime = pArrival[sProc]
 pQueue.put(sProc)
 
-print('='*21,' READY QUEUE ','='*20)
+print('='*18,' READY QUEUE SJF ','='*19)
+print(f"<{str(currTime).center(3)}> Put in {sProc+1}")
 
 #While we still have burst,do this
 while sum(pBurst) != 0:
-
-    l = [x+1 for x in pQueue.queue]
-    print(f"Ready queue at time {str(currTime).center(3)} : {l}")
 
     #same as fcfs but we take min burst from queue
     pQueueCopy =  Queue()
@@ -89,6 +87,8 @@ while sum(pBurst) != 0:
     for p in pQueueCopy.queue:
         if p != qProc:
             pQueue.put(p)
+
+    print(f'<{str(currTime).center(3)}> Cross out {qProc+1}')
     
     granttList.append((currTime,qProc))
 
@@ -100,35 +100,21 @@ while sum(pBurst) != 0:
     currTime += pBurst[qProc]
     pBurst[qProc] = 0
 
-    #print(f"Time {prevTime} to {currTime} ==> P{qProc+1} ==> New Burst is {pBurst[qProc]}")
-
     #check if someone arrived meanwhile and put them in queue
     arrivedMeanwhile = getProcessesArrived(prevTime,currTime) #should also return an array specifying the exact arrival for each of the pids
         
     for p in arrivedMeanwhile:
         pQueue.put(p[1])
-        ll = [x+1 for x in pQueue.queue]
-        print(f"Ready queue at time {str(p[0]).center(3)} : {ll} => {p[1]+1} arrived") 
+        print(f'<{str(p[0]).center(3)}> Put {p[1] + 1} in .Cross out {qProc+1} (if any)')
 
     #Compute time because qProc finished
     completionTime[qProc] = currTime
     turnAroundTime[qProc] = completionTime[qProc] - pArrival[qProc]
     waitTime[qProc] = turnAroundTime[qProc] - pBurstCopy[qProc]
-    #print(f'P{qProc+1} just finished at time {currTime}')
 
     prevTime = currTime
 
 #Print output
-print("========= AT ==== BT ==== CT ==== TR ==== TW ==== RT ===")
-for i in range(0,pCount):
-    print(f"= P{str(i+1).ljust(4)}|",end='')
-    print(f"{str(pArrival[i]).center(7)}|",end='')
-    print(f"{str(pBurstCopy[i]).center(7)}|",end='')
-    print(f"{str(completionTime[i]).center(7)}|",end='')
-    print(f"{str(turnAroundTime[i]).center(7)}|",end='')
-    print(f"{str(waitTime[i]).center(7)}|",end='')
-    print(f"{str(responseTime[i]).center(7)}=")
-
 print('='*23,' GRANTT ','='*23)
 
 #Print processes
@@ -156,10 +142,16 @@ for p in granttList:
     i=1
 print(f"{str(currTime).center(5)}")
 
+print('='*22,"EXPLICIT",'='*22)
+print("         Rt = Ct - Arr            Wt = Tr - Bst")
+for i in range(0,pCount):
+    print(f"P{i+1}:")
+    print(f" |-> Rt: {str(completionTime[i]).center(0)}-{str(pArrival[i]).center(0)} = {str(turnAroundTime[i]).center(0)}")
+    print(f" |-> Wt: {str(turnAroundTime[i]).center(0)}-{str(pBurstCopy[i]).center(0)} = {str(waitTime[i]).center(0)}")
+
 print('='*22,' AVERAGES ','='*22)
 
 print(f"= Avg TR (Turn Around)  : {sum(turnAroundTime) / pCount}")
 print(f"= Avg TW (Wait Time)    : {sum(waitTime) / pCount}")
 print(f"= Avg RT (Response Time): {sum(responseTime) / pCount}")
 print(f"= Context switches      : {getContextSwitches()}")
-print('='*56)
