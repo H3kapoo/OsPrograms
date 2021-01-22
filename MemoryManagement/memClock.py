@@ -29,5 +29,5 @@ def clockAlgorithm(pList,pageFrames,mappingMoment):
             frcopy = arr.copy()
         frLists.append(arr.copy())
 
-    return pf,frcopy,frLists
+    return pf,frLists
 

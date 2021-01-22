@@ -38,4 +38,4 @@ def fifoAlgorithm(pages, frames,mappingMoment):
         frLists.append(fr2.copy())
         fr2.clear()
 
-    return page_faults,fr,frLists
+    return page_faults,frLists

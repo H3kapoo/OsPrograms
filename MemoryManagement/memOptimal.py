@@ -44,5 +44,5 @@ def optimalAlgorithm(pg,fn,mappingMoment):
 
         frLists.append(fr.copy())
 
-    return len(pg)-hits,frcopy,frLists
+    return len(pg)-hits,frLists
 
