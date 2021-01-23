@@ -54,3 +54,36 @@ The program reads data from the file ```mmData.txt``` as follows: <br/>
 [Click here for output part1](https://i.imgur.com/dEU83OF.png) <br/>
 [Click here for output part2](https://i.imgur.com/ck0Vr2p.png)
 
+# Deadlocks
+### Exercise statement
+![Imgur Image](https://i.imgur.com/qiEWhY7.png)
+
+### Available algorithms
+**Banker's**
+
+### How to feed the program
+###### Note: ```lists``` are comma separated
+The program reads data from the file ```dlData.txt``` as follows: <br/>
+| Line # | What to input               |
+|--------|-----------------------------|
+| Line 1 | MAX list                    |
+| Line 2 | a1) ALLOC list              |
+| Line 3 | a2) ALLOC list              |
+| Line 4 | b) ALLOC list               |
+| Line 5 | Process given at b2)        |
+| Line 6 | Additional resources at b2) |
+
+### What the program computes
+```1.Minimum number of total resources & steps log for a1) and a2)``` <br/>
+```2.Resources to split for a deadlock to occur at b1)``` <br/>
+```3.Second process so that the state is still safe for b2)``` <br/>
+```4.Corresponding page frame at specified address and moment``` 
+
+### Program output example
+
+
+
+
+
+
+
