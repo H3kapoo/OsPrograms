@@ -21,7 +21,14 @@ The program reads data from the file ```scData.txt``` as follows: <br/>
 ```5.Context switches```
 
 ### Program output example for Round Robin
-[Click here for output](https://i.imgur.com/o3q3zQH.png)
+
+<details>
+
+<summary>Click to see output</summary>
+
+https://i.imgur.com/o3q3zQH.png
+
+</details>
 
 # Memory Management
 ### Exercise statement
