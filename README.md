@@ -99,7 +99,9 @@ The program reads data from the file ```dlData.txt``` as follows: <br/>
 
 <summary>Click here to see the output</summary>
 
-None yet
+![Imgur Image](https://i.imgur.com/EwOMyir.png)
+![Imgur Image](https://i.imgur.com/JlrXkRX.png)
+![Imgur Image](https://i.imgur.com/2wcDoRk.png)
 
 </details>
 
