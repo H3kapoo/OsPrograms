@@ -1,11 +1,11 @@
 # Process Scheduling
-### Exercise statement
+### [1] Exercise statement
 ![Imgur Image](https://i.imgur.com/L2hgxm3.png)
 
-### Available algorithms
+### [2] Available algorithms
 **RR** (Round Robin) <br/> **SJF** (Shortest Job First) <br/> **SRTN** (Shortest Running Time Next) <br/> **FCFS** (First Come First Served)
 
-### How to feed the program
+### [3] How to feed the program
 The program reads data from the file ```scData.txt``` as follows: <br/>
 | Arrival    | Burst    |
 |------------|----------|
@@ -13,14 +13,14 @@ The program reads data from the file ```scData.txt``` as follows: <br/>
 | ...        | ...      |
 | Pn Arrival | Pn Burst |
 
-### What the program computes
+### [4] What the program computes
 ```1.Process queue log``` <br/>
 ```2.GRANTT diagram``` <br/>
 ```3.Turn around time and Wait time for each process``` <br/>
 ```4.Avg turn around / wait time / response time``` <br/>
 ```5.Context switches```
 
-### Program output example for Round Robin
+### [5] Program output example for Round Robin
 
 <details>
 
