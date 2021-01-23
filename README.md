@@ -24,7 +24,7 @@ The program reads data from the file ```scData.txt``` as follows: <br/>
 
 <details>
 
-<summary>Click to see output</summary>
+<summary>Click here to see the output</summary>
 
 ![Imgur Image](https://i.imgur.com/o3q3zQH.png)
 
@@ -58,8 +58,15 @@ The program reads data from the file ```mmData.txt``` as follows: <br/>
 ```4.Corresponding page frame at specified address and moment``` 
 
 ### Program output example
-[Click here for output part1](https://i.imgur.com/dEU83OF.png) <br/>
-[Click here for output part2](https://i.imgur.com/ck0Vr2p.png)
+
+<details>
+
+<summary>Click here to see the output</summary>
+
+![Imgur Image](https://i.imgur.com/dEU83OF.png)
+![Imgur Image](https://i.imgur.com/ck0Vr2p.png)
+
+</details>
 
 # Deadlocks
 ### Exercise statement
@@ -88,7 +95,13 @@ The program reads data from the file ```dlData.txt``` as follows: <br/>
 
 ### Program output example
 
+<details>
 
+<summary>Click here to see the output</summary>
+
+None yet
+
+</details>
 
 
 
