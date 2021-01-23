@@ -26,7 +26,7 @@ The program reads data from the file ```scData.txt``` as follows: <br/>
 
 <summary>Click to see output</summary>
 
-https://i.imgur.com/o3q3zQH.png
+![Imgur Image](https://i.imgur.com/o3q3zQH.png)
 
 </details>
 
