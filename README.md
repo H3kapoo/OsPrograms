@@ -1,6 +1,4 @@
-# OsPrograms
-Some programs to solve Operating Systems course exercises ;)
-## Process Scheduling
+# Process Scheduling
 #### Available algorithms
 **RR** (Round Robin) <br/> **SJF** (Shortest Job First) <br/> **SRTN** (Shortest Running Time Next) <br/> **FCFS** (First Come First Served)
 
@@ -25,7 +23,7 @@ The program reads data from the file ```scData.txt``` as follows: <br/>
 #### Program output example for Round Robin
 [Click here for output](https://i.imgur.com/o3q3zQH.png)
 
-## Memory Management
+# Memory Management
 #### Available algorithms
 **Optimal** <br/>
 **FIFO** <br/>
