@@ -1,5 +1,5 @@
 # Process Scheduling
-#### Exercise statement
+#### **Exercise statement**
 ![Imgur Image](https://i.imgur.com/L2hgxm3.png)
 
 #### Available algorithms
