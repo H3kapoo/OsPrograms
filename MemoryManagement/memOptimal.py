@@ -26,7 +26,6 @@ def predict(pg,fr,index):
 def optimalAlgorithm(pg,fn,mappingMoment):
     hits=0
     fr = []
-    frcopy = []
     frLists = []
     for i in range(0,len(pg)):
 
@@ -39,9 +38,6 @@ def optimalAlgorithm(pg,fn,mappingMoment):
                 j = predict(pg,fr,i+1)
                 fr[j] = pg[i]
             
-        if i == mappingMoment:
-                frcopy = fr.copy()
-
         frLists.append(fr.copy())
 
     return len(pg)-hits,frLists
