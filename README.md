@@ -1,4 +1,7 @@
 # Process Scheduling
+#### Exercise statement
+![Imgur Image](https://i.imgur.com/L2hgxm3.png)
+
 #### Available algorithms
 **RR** (Round Robin) <br/> **SJF** (Shortest Job First) <br/> **SRTN** (Shortest Running Time Next) <br/> **FCFS** (First Come First Served)
 
@@ -17,13 +20,13 @@ The program reads data from the file ```scData.txt``` as follows: <br/>
 ```4.Avg turn around / wait time / response time``` <br/>
 ```5.Context switches```
 
-#### Exercise statement
-![Imgur Image](https://i.imgur.com/L2hgxm3.png)
-
 #### Program output example for Round Robin
 [Click here for output](https://i.imgur.com/o3q3zQH.png)
 
 # Memory Management
+#### Exercise statement
+![Imgur Image](https://i.imgur.com/Rm9s3ar.png)
+
 #### Available algorithms
 **Optimal** <br/>
 **FIFO** <br/>
@@ -46,9 +49,6 @@ The program reads data from the file ```mmData.txt``` as follows: <br/>
 ```2.Failure count with process queue log``` <br/>
 ```3.Memory mapping description at specifiet moment``` <br/>
 ```4.Corresponding page frame at specified address and moment``` 
-
-#### Exercise statement
-![Imgur Image](https://i.imgur.com/Rm9s3ar.png)
 
 #### Program output example
 [Click here for output part1](https://i.imgur.com/dEU83OF.png) <br/>
