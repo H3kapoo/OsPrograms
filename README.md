@@ -47,7 +47,7 @@ The program reads data from the file ```mmData.txt``` as follows: <br/>
 ### What the program computes
 ```1.Number of virtual pages & page frames``` <br/>
 ```2.Failure count with process queue log``` <br/>
-```3.Memory mapping description at specifiet moment``` <br/>
+```3.Memory mapping description at specified moment``` <br/>
 ```4.Corresponding page frame at specified address and moment``` 
 
 ### Program output example
