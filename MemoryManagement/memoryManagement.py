@@ -36,9 +36,9 @@ with open("../mmData.txt","r") as f:
 numberOfVirtualPages = 2**systemBits // pageSize
 numberOfPageFrames = ramAvailable*1024 // pageSize
 
-optimalFail,optimalLists   = optimalAlgorithm(processAccessList,numberOfPageFrames,pagesMemoryMappingAtMoment)
-clockFail,clockLists       = clockAlgorithm(processAccessList,numberOfPageFrames,pagesMemoryMappingAtMoment)
-fifoFail,fifoLists         = fifoAlgorithm(processAccessList,numberOfPageFrames,pagesMemoryMappingAtMoment)
+optimalFail,optimalLists   = optimalAlgorithm(processAccessList,numberOfPageFrames)
+clockFail,clockLists       = clockAlgorithm(processAccessList,numberOfPageFrames)
+fifoFail,fifoLists         = fifoAlgorithm(processAccessList,numberOfPageFrames)
 
 #Find page frame for each algorithm at moment and address
 #Find 'vp' index in the above ^ memory mappings

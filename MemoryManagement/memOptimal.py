@@ -23,7 +23,7 @@ def predict(pg,fr,index):
     return 0 if res == -1 else res
 
 
-def optimalAlgorithm(pg,fn,mappingMoment):
+def optimalAlgorithm(pg,fn):
     hits=0
     fr = []
     frLists = []

@@ -1,6 +1,6 @@
 from queue import Queue
 
-def fifoAlgorithm(pages, frames,mappingMoment):
+def fifoAlgorithm(pages, frames):
     n = len(pages)
     s = set()
 

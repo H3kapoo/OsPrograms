@@ -13,7 +13,7 @@ def findAndUpdate(x,arr,secondChance,frames):
             return True
     return False
 
-def clockAlgorithm(pList,pageFrames,mappingMoment):
+def clockAlgorithm(pList,pageFrames):
     pointer = 0
     pf = 0
     arr = [-1]*pageFrames
