@@ -1,11 +1,11 @@
 # Process Scheduling
-### Exercise statement
+### 1.Exercise statement
 ![Imgur Image](https://i.imgur.com/L2hgxm3.png)
 
-### Available algorithms
+### 2.Available algorithms
 **RR** (Round Robin) <br/> **SJF** (Shortest Job First) <br/> **SRTN** (Shortest Running Time Next) <br/> **FCFS** (First Come First Served)
 
-### How to feed the program
+### 3.How to feed the program
 The program reads data from the file ```scData.txt``` as follows: <br/>
 | Arrival    | Burst    |
 |------------|----------|
@@ -13,14 +13,14 @@ The program reads data from the file ```scData.txt``` as follows: <br/>
 | ...        | ...      |
 | Pn Arrival | Pn Burst |
 
-### What the program computes
+### 4.What the program computes
 ```1.Process queue log``` <br/>
 ```2.GRANTT diagram``` <br/>
 ```3.Turn around time and Wait time for each process``` <br/>
 ```4.Avg turn around / wait time / response time``` <br/>
 ```5.Context switches```
 
-### Program output example for Round Robin
+### 5.Program output example for Round Robin
 
 <details>
 
@@ -31,15 +31,15 @@ The program reads data from the file ```scData.txt``` as follows: <br/>
 </details>
 
 # Memory Management
-### Exercise statement
+### 1.Exercise statement
 ![Imgur Image](https://i.imgur.com/Rm9s3ar.png)
 
-### Available algorithms
+### 2.Available algorithms
 **Optimal** <br/>
 **FIFO** <br/>
 **Clock (Second Chance)**
 
-### How to feed the program
+### 3.How to feed the program
 The program reads data from the file ```mmData.txt``` as follows: <br/>
 | Line # | What to input                    |
 |--------|----------------------------------|
@@ -51,13 +51,13 @@ The program reads data from the file ```mmData.txt``` as follows: <br/>
 | Line 6 | Page frame at address [hex]      |
 | Line 7 | Page frame at address time [int] |
 
-### What the program computes
+### 4.What the program computes
 ```1.Number of virtual pages & page frames``` <br/>
 ```2.Failure count with process queue log``` <br/>
 ```3.Memory mapping description at specified moment``` <br/>
 ```4.Corresponding page frame at specified address and moment``` 
 
-### Program output example
+### 5.Program output example
 
 <details>
 
@@ -69,13 +69,13 @@ The program reads data from the file ```mmData.txt``` as follows: <br/>
 </details>
 
 # Deadlocks
-### Exercise statement
+### 1.Exercise statement
 ![Imgur Image](https://i.imgur.com/qiEWhY7.png)
 
-### Available algorithms
+### 2.Available algorithms
 **Banker's**
 
-### How to feed the program
+### 3.How to feed the program
 ###### Note: ```lists``` are comma separated
 The program reads data from the file ```dlData.txt``` as follows: <br/>
 | Line # | What to input               |
@@ -87,19 +87,21 @@ The program reads data from the file ```dlData.txt``` as follows: <br/>
 | Line 5 | Process given at b2)        |
 | Line 6 | Additional resources at b2) |
 
-### What the program computes
+### 4.What the program computes
 ```1.Minimum number of total resources & steps log for a1) and a2)``` <br/>
 ```2.Resources to split for a deadlock to occur at b1)``` <br/>
 ```3.Second process so that the state is still safe for b2)``` <br/>
 ```4.Corresponding page frame at specified address and moment``` 
 
-### Program output example
+### 5.Program output example
 
 <details>
 
 <summary>Click here to see the output</summary>
 
-None yet
+![Imgur Image](https://i.imgur.com/EwOMyir.png)
+![Imgur Image](https://i.imgur.com/JlrXkRX.png)
+![Imgur Image](https://i.imgur.com/2wcDoRk.png)
 
 </details>
 
